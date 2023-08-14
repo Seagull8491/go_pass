@@ -22,7 +22,9 @@ jobs:
       - name: Test
         run: |
           pwd
-          ls
+          echo "---------------"
+          ls -la
+          echo "---------------"
           go test -coverprofile="coverage.txt" -covermode=atomic ./...
 
       - name: upload coverage
