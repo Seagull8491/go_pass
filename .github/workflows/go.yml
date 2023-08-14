@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: 
+        run: |
           pwd
           ls
           go test -coverprofile="coverage.txt" -covermode=atomic ./...
