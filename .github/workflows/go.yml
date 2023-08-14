@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,10 +16,13 @@ jobs:
       - name: Build
         run: go build -v ./...
 
-    - name: Test
-      run: go test -coverprofile="coverage.txt" -covermode=atomic ./...
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: go test -coverprofile="coverage.txt" -covermode=atomic ./...
 
-    - name: upload coverage
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+      - name: upload coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
