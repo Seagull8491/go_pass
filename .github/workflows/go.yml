@@ -1,0 +1,38 @@
+name: Go package
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21'
+
+      - name: Build
+        run: go build -v ./...
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21'
+      - name: Test
+        run: |
+          pwd
+          echo "---------------"
+          ls -la
+          echo "---------------"
+          go test -coverprofile="coverage.txt" -covermode=atomic ./...
+
+      - name: upload coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
