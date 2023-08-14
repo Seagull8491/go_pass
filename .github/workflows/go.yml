@@ -20,7 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: go test -coverprofile="coverage.txt" -covermode=atomic ./...
+        run: 
+          pwd
+          ls
+          go test -coverprofile="coverage.txt" -covermode=atomic ./...
 
       - name: upload coverage
         uses: codecov/codecov-action@v1
